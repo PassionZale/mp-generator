@@ -8,6 +8,7 @@
   "bin": {
     "mp-generator-init": "bin/mp-generator-init.js"
   },
+  "main": "lib/init_command.js",
   "files": [
     "bin",
     "lib"

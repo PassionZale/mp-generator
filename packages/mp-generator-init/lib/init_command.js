@@ -1,7 +1,7 @@
-'use strict';
+"use strict";
 
 function initCommand() {
-    // TODO
+  console.log("initCommand");
 }
 
 module.exports = initCommand;

@@ -4,4 +4,6 @@
 
 console.log('mp-generator-init-enty-point')
 
-module.exports = {}
+const Command = require("..")
+
+Command()
