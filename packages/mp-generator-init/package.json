@@ -1,0 +1,19 @@
+{
+  "name": "mp-generator-init",
+  "version": "1.0.0",
+  "description": "",
+  "main": "lib/init_command.js",
+  "bin": {
+    "egg-init": "bin/mp-generator-init.js"
+  },
+  "files": [
+    "bin",
+    "lib"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
