@@ -1,7 +1,10 @@
 {
   "name": "mp-generator-init",
   "version": "1.0.0",
-  "description": "",
+  "description": "> TODO: description",
+  "author": "Zhang Lei <372470745@qq.com>",
+  "homepage": "https://github.com/PassionZale/mp-generator#readme",
+  "license": "ISC",
   "bin": {
     "mp-generator-init": "bin/mp-generator-init.js"
   },
@@ -9,10 +12,14 @@
     "bin",
     "lib"
   ],
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PassionZale/mp-generator.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/PassionZale/mp-generator/issues"
+  }
 }

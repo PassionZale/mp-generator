@@ -1,14 +1,21 @@
 {
   "name": "create-mp-generator",
   "version": "1.0.0",
-  "description": "",
-  "bin": "./bin/mp-generator-create.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
+  "description": "alias for mp-generator-init",
+  "author": "Zhang Lei <372470745@qq.com>",
+  "homepage": "https://github.com/PassionZale/mp-generator#readme",
   "license": "ISC",
+  "bin": "bin/mp-generator-create.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PassionZale/mp-generator.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/PassionZale/mp-generator/issues"
+  },
   "dependencies": {
     "mp-generator-init": "^1.0.0"
   }

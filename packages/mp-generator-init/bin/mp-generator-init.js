@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
-"use strict";
+'use strict';
 
-console.log('mp-gerator-init')
+console.log('mp-generator-init-enty-point')
+
+module.exports = {}
