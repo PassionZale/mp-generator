@@ -21,5 +21,15 @@
   },
   "bugs": {
     "url": "https://github.com/PassionZale/mp-generator/issues"
+  },
+  "devDependencies": {
+    "chalk": "^5.0.1",
+    "commander": "^9.4.0",
+    "consolidate": "^0.16.0",
+    "inquirer": "^9.1.2",
+    "metalsmith": "^2.5.0",
+    "ora": "^6.1.2",
+    "rimraf": "^3.0.2",
+    "tildify": "^3.0.0"
   }
 }
