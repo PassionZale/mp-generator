@@ -8,11 +8,6 @@
   "bin": {
     "mp-generator-init": "bin/mp-generator-init.js"
   },
-  "main": "lib/init_command.js",
-  "files": [
-    "bin",
-    "lib"
-  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/PassionZale/mp-generator.git"
@@ -23,10 +18,11 @@
   "bugs": {
     "url": "https://github.com/PassionZale/mp-generator/issues"
   },
-  "devDependencies": {
-    "chalk": "^5.0.1",
-    "commander": "^9.4.0",
+  "dependencies": {
+    "chalk": "^3.0.0",
+    "commander": "^5.0.0",
     "consolidate": "^0.16.0",
+    "handlebars": "^4.7.7",
     "inquirer": "^9.1.2",
     "metalsmith": "^2.5.0",
     "ora": "^6.1.2",
