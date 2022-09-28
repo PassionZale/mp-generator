@@ -23,9 +23,9 @@
     "commander": "^5.0.0",
     "consolidate": "^0.16.0",
     "handlebars": "^4.7.7",
-    "inquirer": "^9.1.2",
+    "inquirer": "^7.1.0",
     "metalsmith": "^2.5.0",
-    "ora": "^6.1.2",
+    "ora": "^4.0.3",
     "rimraf": "^3.0.2",
     "tildify": "^3.0.0"
   }

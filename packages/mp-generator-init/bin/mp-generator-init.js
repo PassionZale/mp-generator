@@ -1,13 +1,21 @@
 #!/usr/bin/env node
 
+"use strict";
+
 const program = require("commander");
 const chalk = require("chalk");
+const inquirer = require("inquirer");
 const path = require("path");
+const exists = require("fs").existsSync;
+const { homedir } = require("os");
+const {
+  TEMPLATE_CACH_DIRNAME,
+  TEMPLATE_REPO_PATH,
+} = require("../lib/constants");
+const logger = require("../lib/logger");
 
 // Usage
-program
-  .usage("<template-name> [project-name]")
-  .option("--offline", "use cached template");
+program.usage("[projectName]").option("--offline", "use cached template");
 
 // Help
 program.on("--help", () => {
@@ -32,22 +40,44 @@ function help() {
 
 help();
 
-const {
-  TEMPLATE_CACH_DIRNAME,
-  TEMPLATE_REPO_PATH,
-} = require("../lib/constants");
+createApp().catch(logger.fatal);
 
-// 模板名称, 原始名称
-let [rawName] = program.args;
+async function createApp() {
+  const output = await init();
 
-// 是否以当前目录为根目录
-const inPlace = !rawName || rawName === ".";
+  console.log(output);
+}
 
-// 目录名称
-const name = inPlace ? path.relative("../", process.cwd()) : rawName;
+async function init() {
+  // 项目名称
+  let [projectName] = program.args;
 
-// 目标目录绝对路径
-const to = path.resolve(rawName || '.')
+  // 是否以当前目录为根目录
+  const inPlace = !projectName || projectName === ".";
 
-// 缓存 templates 绝对路径
-const tmp = path.join(home, TEMPLATE_CACH_DIRNAME, template)
+  // 目录名称
+  const name = inPlace ? path.relative("../", process.cwd()) : projectName;
+
+  // 目标目录绝对路径
+  const output = path.resolve(projectName || ".");
+
+  console.log(projectName, inPlace, name, output);
+
+  if (inPlace || exists(output)) {
+    const { ok } = await inquirer.prompt([
+      {
+        type: "confirm",
+        message: inPlace ? "是否在当前目录创建项目" : "目录已存在，是否继续",
+        name: "ok",
+      },
+    ]);
+
+    if (!ok) {
+      process.exit(1);
+    }
+  }
+
+  return output;
+}
+
+function downloadAndGenerate(template) {}
