@@ -19,18 +19,14 @@ const logger = require("../lib/logger");
 const generate = require("../lib/generate");
 
 // Usage
-program.usage("[projectName]").option("--offline", "use cached template");
+program.usage("<projectName>");
 
 // Help
 program.on("--help", () => {
   console.log();
-  console.log("  Examples:");
+  console.log("  示例:");
   console.log();
-  console.log(chalk.gray("    # create a new project with target template"));
-  console.log(chalk.gray("    # using npm?"));
-  console.log(chalk.green("    $ npx init mp-generator my-project"));
-  console.log(chalk.gray("    # using npx?"));
-  console.log(chalk.green("    $ npx create-mp-generator my-project"));
+  console.log("    $ npx create-mp-generator my-project");
   console.log("    $ cd my-project");
   console.log("    $ npm install");
   console.log("    $ npm run start");
@@ -57,6 +53,20 @@ async function createApp() {
   const template = await selectTemplate();
 
   await generate(template, project);
+
+  console.log();
+  logger.success(`${project.projectName} 生成完毕`);
+
+  console.log();
+
+  console.log("   To get startted:");
+
+  console.log("   cd %s/", project.projectName);
+
+  console.log("   npm install");
+  console.log("   npm run start");
+
+  console.log();
 }
 
 async function initProject() {
