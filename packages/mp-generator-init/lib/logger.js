@@ -5,7 +5,7 @@ const format = require('util').format
  * Prefix.
  */
 
-const prefix = '   mp-generator'
+const prefix = '   create-mp-generator'
 const sep = chalk.gray('·')
 
 /**
