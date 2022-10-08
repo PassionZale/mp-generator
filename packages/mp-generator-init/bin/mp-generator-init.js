@@ -6,13 +6,17 @@ const program = require("commander");
 const chalk = require("chalk");
 const inquirer = require("inquirer");
 const path = require("path");
+const fse = require("fs-extra");
 const exists = require("fs").existsSync;
+const ora = require("ora");
+const downloadGitRepo = require("download-git-repo");
 const { homedir } = require("os");
 const {
   TEMPLATE_CACH_DIRNAME,
   TEMPLATE_REPO_PATH,
 } = require("../lib/constants");
 const logger = require("../lib/logger");
+const generate = require("../lib/generate");
 
 // Usage
 program.usage("[projectName]").option("--offline", "use cached template");
@@ -40,30 +44,32 @@ function help() {
 
 help();
 
+// 原始名称
+const [rawName] = program.args;
+
 createApp().catch(logger.fatal);
 
 async function createApp() {
-  const output = await init();
+  // { projectName, projectPath }
+  const project = await initProject();
 
-  console.log(output);
+  // { templateName, templatePath }
+  const template = await selectTemplate();
+
+  await generate(template, project);
 }
 
-async function init() {
-  // 项目名称
-  let [projectName] = program.args;
-
+async function initProject() {
   // 是否以当前目录为根目录
-  const inPlace = !projectName || projectName === ".";
+  const inPlace = !rawName || rawName === ".";
 
   // 目录名称
-  const name = inPlace ? path.relative("../", process.cwd()) : projectName;
+  const projectName = inPlace ? path.relative("../", process.cwd()) : rawName;
 
   // 目标目录绝对路径
-  const output = path.resolve(projectName || ".");
+  const projectPath = path.resolve(rawName || ".");
 
-  console.log(projectName, inPlace, name, output);
-
-  if (inPlace || exists(output)) {
+  if (inPlace || exists(projectPath)) {
     const { ok } = await inquirer.prompt([
       {
         type: "confirm",
@@ -77,7 +83,63 @@ async function init() {
     }
   }
 
-  return output;
+  return {
+    projectPath,
+    projectName,
+  };
 }
 
-function downloadAndGenerate(template) {}
+async function selectTemplate() {
+  return new Promise((resolve, reject) => {
+    const spinner = ora("正在下载应用模板...");
+
+    spinner.start();
+
+    const output = path.join(homedir(), TEMPLATE_CACH_DIRNAME);
+
+    // 同步的清空缓存目录
+    fse.emptyDirSync(output);
+
+    downloadGitRepo(
+      `direct:${TEMPLATE_REPO_PATH}#main`,
+      output,
+      { clone: true },
+      async (err) => {
+        spinner.stop();
+
+        if (err) {
+          return reject("Failed to download repo : " + err.message.trim());
+        }
+
+        const meta = fse.readJsonSync(path.join(output, "src/meta.json"), {
+          throws: false,
+        });
+
+        if (meta && meta.length > 1) {
+          const { templateName } = await inquirer.prompt([
+            {
+              message: "请选择应用模板",
+              type: "list",
+              name: "templateName",
+              default: meta[0].name,
+              choices: meta.map((item) => ({
+                name: `${item.name} ${chalk.gray(`(${item.desc})`)}`,
+                value: item.name,
+              })),
+            },
+          ]);
+
+          return resolve({
+            templatePath: path.join(output, `src/${templateName}`),
+            templateName,
+          });
+        } else {
+          return resolve({
+            templatePath: path.join(output, `src/${meta[0].name}`),
+            templateName: meta[0].name,
+          });
+        }
+      }
+    );
+  });
+}
