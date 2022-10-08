@@ -1,3 +1,3 @@
 # create-mp-generator
 
-`npx create-mp-generator my-pp`
+`npx create-mp-generator my-project`
