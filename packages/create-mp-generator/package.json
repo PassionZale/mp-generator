@@ -2,7 +2,7 @@
   "name": "create-mp-generator",
   "version": "1.0.3",
   "description": "alias for mp-generator-init",
-  "author": "Zhang Lei <372470745@qq.com>",
+  "author": "Zhang Lei <whouu@qq.com>",
   "homepage": "https://github.com/PassionZale/mp-generator#readme",
   "license": "ISC",
   "bin": "bin/mp-generator-create.js",
