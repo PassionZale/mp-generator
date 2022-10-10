@@ -64,6 +64,7 @@ async function createApp() {
   console.log("   cd %s/", project.projectName);
 
   console.log("   npm install");
+  console.log("   打开项目，填充 .env.dev 中的 APPID")
   console.log("   npm run start");
 
   console.log();
