@@ -1,13 +1,13 @@
 # mp-generator
 小程序项目生成器
 
-# mp-generator-templates
-
-[mp-generator](https://github.com/PassionZale/mp-generator) 的子仓库，用于存放项目模板。
-
 ## 创建项目
 
 `npx create-mp-generator app`
+
+## 模板仓库
+
+[mp-generator-templates](https://github.com/PassionZale/mp-generator) 的子仓库，用于存放项目模板。
 
 ## 贡献模板
 
